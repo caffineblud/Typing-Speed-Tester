@@ -1,7 +1,12 @@
 import customtkinter as ctk
 import random
 
-from sentences import sentences
+from sentences import (
+    easy_sentences,
+    medium_sentences,
+    hard_sentences
+)
+
 from logic import (
     start_timer,
     calculate_wpm,
@@ -18,12 +23,15 @@ class TypingSpeedApp:
 
         self.root = root
         self.root.title("Typing Speed Tester")
-        self.root.geometry("900x600")
+        self.root.geometry("950x700")
 
         self.timer_started = False
         self.time_left = 60
+        self.current_difficulty = "Medium"
 
-        self.current_sentence = random.choice(sentences)
+        self.current_sentence = random.choice(
+            medium_sentences
+        )
 
         # TITLE
         self.title_label = ctk.CTkLabel(
@@ -33,7 +41,32 @@ class TypingSpeedApp:
         )
         self.title_label.pack(pady=20)
 
-        # SENTENCE DISPLAY (Highlightable)
+        # DIFFICULTY FRAME
+        self.difficulty_frame = ctk.CTkFrame(root)
+        self.difficulty_frame.pack(pady=10)
+
+        self.easy_btn = ctk.CTkButton(
+            self.difficulty_frame,
+            text="Easy",
+            command=lambda: self.set_difficulty("Easy")
+        )
+        self.easy_btn.grid(row=0, column=0, padx=10)
+
+        self.medium_btn = ctk.CTkButton(
+            self.difficulty_frame,
+            text="Medium",
+            command=lambda: self.set_difficulty("Medium")
+        )
+        self.medium_btn.grid(row=0, column=1, padx=10)
+
+        self.hard_btn = ctk.CTkButton(
+            self.difficulty_frame,
+            text="Hard",
+            command=lambda: self.set_difficulty("Hard")
+        )
+        self.hard_btn.grid(row=0, column=2, padx=10)
+
+        # SENTENCE DISPLAY
         self.sentence_display = ctk.CTkTextbox(
             root,
             width=800,
@@ -81,47 +114,26 @@ class TypingSpeedApp:
         self.stats_frame = ctk.CTkFrame(root)
         self.stats_frame.pack(pady=20)
 
-        # TIMER LABEL
         self.timer_label = ctk.CTkLabel(
             self.stats_frame,
             text="Time Left: 60s",
             font=("Arial", 20)
         )
+        self.timer_label.grid(row=0, column=0, padx=30)
 
-        self.timer_label.grid(
-            row=0,
-            column=0,
-            padx=30,
-            pady=10
-        )
-
-        # WPM LABEL
         self.wpm_label = ctk.CTkLabel(
             self.stats_frame,
             text="WPM: 0",
             font=("Arial", 20)
         )
+        self.wpm_label.grid(row=0, column=1, padx=30)
 
-        self.wpm_label.grid(
-            row=0,
-            column=1,
-            padx=30,
-            pady=10
-        )
-
-        # ACCURACY LABEL
         self.accuracy_label = ctk.CTkLabel(
             self.stats_frame,
             text="Accuracy: 0%",
             font=("Arial", 20)
         )
-
-        self.accuracy_label.grid(
-            row=0,
-            column=2,
-            padx=30,
-            pady=10
-        )
+        self.accuracy_label.grid(row=0, column=2, padx=30)
 
         # RESTART BUTTON
         self.restart_button = ctk.CTkButton(
@@ -134,6 +146,22 @@ class TypingSpeedApp:
         )
 
         self.restart_button.pack(pady=20)
+
+    def set_difficulty(self, difficulty):
+
+        self.current_difficulty = difficulty
+        self.restart_test()
+
+    def get_sentence_pool(self):
+
+        if self.current_difficulty == "Easy":
+            return easy_sentences
+
+        elif self.current_difficulty == "Medium":
+            return medium_sentences
+
+        else:
+            return hard_sentences
 
     def check_typing(self, event):
 
@@ -229,7 +257,11 @@ class TypingSpeedApp:
         self.timer_started = False
         self.time_left = 60
 
-        self.current_sentence = random.choice(sentences)
+        sentence_pool = self.get_sentence_pool()
+
+        self.current_sentence = random.choice(
+            sentence_pool
+        )
 
         self.sentence_display.configure(
             state="normal"

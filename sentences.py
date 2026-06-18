@@ -1,26 +1,23 @@
-sentences = [
+easy_sentences = [
+    "I like coding",
+    "Python is fun",
+    "Cats are cute",
+    "Drink more water",
+    "Practice daily"
+]
 
-    """Python is one of the most popular programming languages in the world.
-It is widely used for web development, automation, artificial intelligence,
-and software development because of its simplicity and readability.""",
+medium_sentences = [
+    "Python programming is powerful and easy to learn",
+    "Typing speed improves with regular practice",
+    "Consistency builds skill over time",
+    "Always focus on accuracy before speed",
+    "Learning by doing is the best method"
+]
 
-
-    """Discipline is more important than motivation because motivation fades quickly.
-People who stay consistent with their work every single day usually achieve
-greater success in the long run.""",
-
-
-    """Technology continues to change the world at a rapid pace.
-Students who learn programming, problem solving, and communication skills
-will have a strong advantage in the future.""",
-
-
-    """Typing speed improves with regular practice and proper finger placement.
-Instead of focusing only on speed, try to improve your accuracy and consistency
-while maintaining a comfortable rhythm.""",
-
-
-    """Building projects is one of the best ways to learn programming effectively.
-Small projects teach problem solving, logical thinking, debugging,
-and how different parts of an application work together."""
+hard_sentences = [
+    "Artificial intelligence is transforming industries worldwide",
+    "The quick brown fox jumps over the lazy dog repeatedly",
+    "Building software projects improves practical programming skills",
+    "Success in coding comes from persistence, debugging, and learning",
+    "Complex systems require careful design, optimization, and testing"
 ]
