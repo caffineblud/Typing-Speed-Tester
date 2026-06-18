@@ -33,14 +33,34 @@ class TypingSpeedApp:
         )
         self.title_label.pack(pady=20)
 
-        # SENTENCE DISPLAY
-        self.sentence_label = ctk.CTkLabel(
+        # SENTENCE DISPLAY (Highlightable)
+        self.sentence_display = ctk.CTkTextbox(
             root,
-            text=self.current_sentence,
-            wraplength=800,
+            width=800,
+            height=100,
             font=("Arial", 20)
         )
-        self.sentence_label.pack(pady=20)
+
+        self.sentence_display.pack(pady=20)
+
+        self.sentence_display.insert(
+            "1.0",
+            self.current_sentence
+        )
+
+        self.sentence_display.tag_config(
+            "correct",
+            foreground="green"
+        )
+
+        self.sentence_display.tag_config(
+            "wrong",
+            foreground="red"
+        )
+
+        self.sentence_display.configure(
+            state="disabled"
+        )
 
         # TEXTBOX
         self.textbox = ctk.CTkTextbox(
@@ -49,9 +69,13 @@ class TypingSpeedApp:
             height=120,
             font=("Arial", 18)
         )
+
         self.textbox.pack(pady=20)
 
-        self.textbox.bind("<KeyRelease>", self.check_typing)
+        self.textbox.bind(
+            "<KeyRelease>",
+            self.check_typing
+        )
 
         # STATS FRAME
         self.stats_frame = ctk.CTkFrame(root)
@@ -63,6 +87,7 @@ class TypingSpeedApp:
             text="Time Left: 60s",
             font=("Arial", 20)
         )
+
         self.timer_label.grid(
             row=0,
             column=0,
@@ -76,6 +101,7 @@ class TypingSpeedApp:
             text="WPM: 0",
             font=("Arial", 20)
         )
+
         self.wpm_label.grid(
             row=0,
             column=1,
@@ -89,6 +115,7 @@ class TypingSpeedApp:
             text="Accuracy: 0%",
             font=("Arial", 20)
         )
+
         self.accuracy_label.grid(
             row=0,
             column=2,
@@ -105,11 +132,14 @@ class TypingSpeedApp:
             height=50,
             font=("Arial", 18)
         )
+
         self.restart_button.pack(pady=20)
 
     def check_typing(self, event):
 
         typed_text = self.textbox.get("1.0", "end-1c")
+
+        self.highlight_text(typed_text)
 
         if not self.timer_started and len(typed_text) > 0:
             start_timer()
@@ -129,6 +159,48 @@ class TypingSpeedApp:
 
         self.accuracy_label.configure(
             text=f"Accuracy: {accuracy}%"
+        )
+
+    def highlight_text(self, typed_text):
+
+        self.sentence_display.configure(
+            state="normal"
+        )
+
+        self.sentence_display.delete(
+            "1.0",
+            "end"
+        )
+
+        for i, char in enumerate(self.current_sentence):
+
+            if i < len(typed_text):
+
+                if typed_text[i] == char:
+
+                    self.sentence_display.insert(
+                        "end",
+                        char,
+                        "correct"
+                    )
+
+                else:
+
+                    self.sentence_display.insert(
+                        "end",
+                        char,
+                        "wrong"
+                    )
+
+            else:
+
+                self.sentence_display.insert(
+                    "end",
+                    char
+                )
+
+        self.sentence_display.configure(
+            state="disabled"
         )
 
     def update_timer(self):
@@ -159,15 +231,32 @@ class TypingSpeedApp:
 
         self.current_sentence = random.choice(sentences)
 
-        self.sentence_label.configure(
-            text=self.current_sentence
+        self.sentence_display.configure(
+            state="normal"
+        )
+
+        self.sentence_display.delete(
+            "1.0",
+            "end"
+        )
+
+        self.sentence_display.insert(
+            "1.0",
+            self.current_sentence
+        )
+
+        self.sentence_display.configure(
+            state="disabled"
         )
 
         self.textbox.configure(
             state="normal"
         )
 
-        self.textbox.delete("1.0", "end")
+        self.textbox.delete(
+            "1.0",
+            "end"
+        )
 
         self.timer_label.configure(
             text="Time Left: 60s"
