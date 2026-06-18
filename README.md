@@ -1,15 +1,15 @@
-# ⌨️ Typing Speed Tester V2.0
+# ⌨️ Typing Speed Tester V2.3
 
 ![Python](https://img.shields.io/badge/Python-3.x-blue)
 ![CustomTkinter](https://img.shields.io/badge/GUI-CustomTkinter-green)
 ![Status](https://img.shields.io/badge/Status-Active-success)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
-![Version](https://img.shields.io/badge/Version-2.0-orange)
+![Version](https://img.shields.io/badge/Version-2.3-orange)
 
 A clean and modern **Typing Speed Tester** built with **Python** and **CustomTkinter**.  
 The application measures your **Words Per Minute (WPM)** and **Typing Accuracy** in real time while practicing with randomly selected sentences.
 
-Now upgraded with a **60-second countdown timer** to make the typing test more structured, competitive, and realistic.
+Now upgraded with **countdown timer**, **live character highlighting**, **difficulty modes**, and **persistent high score tracking**.
 
 ---
 
@@ -18,6 +18,10 @@ Now upgraded with a **60-second countdown timer** to make the typing test more s
 - 🚀 Real-time WPM calculation
 - 🎯 Live accuracy tracking
 - ⏱️ 60-second countdown timer
+- 🟢 Live correct character highlighting
+- 🔴 Live wrong character highlighting
+- 📚 Difficulty modes (Easy / Medium / Hard)
+- 🏆 Persistent high score tracking
 - 🔄 Restart test anytime
 - 📝 Random practice sentences
 - 🌙 Modern dark-themed UI
@@ -25,25 +29,39 @@ Now upgraded with a **60-second countdown timer** to make the typing test more s
 
 ---
 
-## 🆕 What's New in V2.0
+## 🆕 What's New in V2.3
 
-- ⏱️ Added a **60-second countdown timer**
+### V2.0
+- ⏱️ Added **60-second countdown timer**
 - ▶️ Timer starts automatically on first key press
-- 🔒 Typing box disables automatically when timer reaches zero
-- 🔄 Restart button now resets timer, sentence, WPM, and accuracy
-- 📊 Improved stats layout with **Time | WPM | Accuracy**
+- 🔒 Typing box disables when timer reaches zero
+- 🔄 Restart fully resets timer and stats
 
-This makes the application feel like a proper typing benchmark instead of an open-ended typing box.
+### V2.1
+- 🟢 Added **live character highlighting**
+- 🔴 Correct input turns green
+- ❌ Wrong input turns red
+- 🎯 Improved real-time typing feedback
+
+### V2.2
+- 📚 Added **Difficulty Modes**
+- 🟢 Easy → short/simple sentences
+- 🟡 Medium → balanced sentence difficulty
+- 🔴 Hard → long/complex sentences
+
+### V2.3
+- 🏆 Added **High Score System**
+- 💾 Best WPM stored in `highscore.json`
+- 💾 Best Accuracy stored in `highscore.json`
+- 🔄 Auto-loads high scores on startup
+- 📈 Tracks performance progression across sessions
 
 ---
 
 ## 📸 Screenshots
 
-### Main Menu
-![Menu](screenshots/menu.png)
-
-### Speed Test Window
-![Speed Test](screenshots/speed_test.png)
+### V2.3 Updated UI
+![V2.3](screenshots/V2.3.png)
 
 ---
 
@@ -55,9 +73,11 @@ This makes the application feel like a proper typing benchmark instead of an ope
 ├── ui.py
 ├── logic.py
 ├── sentences.py
+├── highscore.json
 ├── screenshots/
 │   ├── menu.png
-│   └── speed_test.png
+│   ├── speed_test.png
+│   └── V2.3.png
 └── README.md
 ```
 
@@ -86,6 +106,7 @@ python main.py
 - Python
 - CustomTkinter
 - Tkinter
+- JSON (High Score Storage)
 
 ---
 

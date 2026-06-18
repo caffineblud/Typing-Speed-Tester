@@ -1,5 +1,7 @@
 import customtkinter as ctk
 import random
+import json
+import os
 
 from sentences import (
     easy_sentences,
@@ -23,7 +25,7 @@ class TypingSpeedApp:
 
         self.root = root
         self.root.title("Typing Speed Tester")
-        self.root.geometry("950x700")
+        self.root.geometry("950x750")
 
         self.timer_started = False
         self.time_left = 60
@@ -32,6 +34,12 @@ class TypingSpeedApp:
         self.current_sentence = random.choice(
             medium_sentences
         )
+
+        # Load High Scores
+        self.high_score_file = "highscore.json"
+        self.best_wpm = 0
+        self.best_accuracy = 0
+        self.load_high_scores()
 
         # TITLE
         self.title_label = ctk.CTkLabel(
@@ -119,21 +127,39 @@ class TypingSpeedApp:
             text="Time Left: 60s",
             font=("Arial", 20)
         )
-        self.timer_label.grid(row=0, column=0, padx=30)
+        self.timer_label.grid(row=0, column=0, padx=20)
 
         self.wpm_label = ctk.CTkLabel(
             self.stats_frame,
             text="WPM: 0",
             font=("Arial", 20)
         )
-        self.wpm_label.grid(row=0, column=1, padx=30)
+        self.wpm_label.grid(row=0, column=1, padx=20)
 
         self.accuracy_label = ctk.CTkLabel(
             self.stats_frame,
             text="Accuracy: 0%",
             font=("Arial", 20)
         )
-        self.accuracy_label.grid(row=0, column=2, padx=30)
+        self.accuracy_label.grid(row=0, column=2, padx=20)
+
+        # HIGH SCORE FRAME
+        self.high_score_frame = ctk.CTkFrame(root)
+        self.high_score_frame.pack(pady=10)
+
+        self.best_wpm_label = ctk.CTkLabel(
+            self.high_score_frame,
+            text=f"Best WPM: {self.best_wpm}",
+            font=("Arial", 18)
+        )
+        self.best_wpm_label.grid(row=0, column=0, padx=20)
+
+        self.best_accuracy_label = ctk.CTkLabel(
+            self.high_score_frame,
+            text=f"Best Accuracy: {self.best_accuracy}%",
+            font=("Arial", 18)
+        )
+        self.best_accuracy_label.grid(row=0, column=1, padx=20)
 
         # RESTART BUTTON
         self.restart_button = ctk.CTkButton(
@@ -146,6 +172,29 @@ class TypingSpeedApp:
         )
 
         self.restart_button.pack(pady=20)
+
+    def load_high_scores(self):
+
+        if os.path.exists(self.high_score_file):
+
+            with open(self.high_score_file, "r") as file:
+
+                data = json.load(file)
+
+                self.best_wpm = data.get("best_wpm", 0)
+                self.best_accuracy = data.get(
+                    "best_accuracy",
+                    0
+                )
+
+    def save_high_scores(self):
+
+        with open(self.high_score_file, "w") as file:
+
+            json.dump({
+                "best_wpm": self.best_wpm,
+                "best_accuracy": self.best_accuracy
+            }, file)
 
     def set_difficulty(self, difficulty):
 
@@ -189,16 +238,30 @@ class TypingSpeedApp:
             text=f"Accuracy: {accuracy}%"
         )
 
+        # Update High Scores
+        if wpm > self.best_wpm:
+            self.best_wpm = wpm
+
+        if accuracy > self.best_accuracy:
+            self.best_accuracy = accuracy
+
+        self.best_wpm_label.configure(
+            text=f"Best WPM: {self.best_wpm}"
+        )
+
+        self.best_accuracy_label.configure(
+            text=f"Best Accuracy: {self.best_accuracy}%"
+        )
+
+        self.save_high_scores()
+
     def highlight_text(self, typed_text):
 
         self.sentence_display.configure(
             state="normal"
         )
 
-        self.sentence_display.delete(
-            "1.0",
-            "end"
-        )
+        self.sentence_display.delete("1.0", "end")
 
         for i, char in enumerate(self.current_sentence):
 
