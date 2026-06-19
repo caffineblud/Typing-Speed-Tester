@@ -15,8 +15,8 @@
 
 <table align="center">
 <tr>
-<td><img src="desktop-version/screenshots/V2.3.png" width="430" alt="Desktop Edition"/></td>
-<td><img src="web-version/screenshots/V3.0.png" width="430" alt="Web Edition"/></td>
+<td><img src="https://raw.githubusercontent.com/caffineblud/typing-speed-tester/main/desktop%20version/screenshots/V2.3.png" width="430" alt="Desktop Edition"/></td>
+<td><img src="https://raw.githubusercontent.com/caffineblud/typing-speed-tester/main/web%20version/screenshots/V3.0.png" width="430" alt="Web Edition"/></td>
 </tr>
 <tr>
 <td align="center"><b>🖥️ Desktop Edition (V2.4)</b></td>
@@ -36,7 +36,7 @@
 | **Highlighting Method** | `CTkTextbox` text tags | One `<span>` per character |
 | **Audio** | `playsound` on daemon threads | HTML5 `Audio` API |
 | **Best for** | Offline practice, native desktop feel | Quick access, no install, shareable link |
-| **Docs** | [`desktop-version/README.md`](desktop-version/README.md) | [`web-version/README.md`](web-version/README.md) |
+| **Docs** | [Desktop Documentation →](./desktop%20version/README.md) | [Web Documentation →](./web%20version/README.md) |
 
 ---
 
@@ -62,7 +62,7 @@ typing-speed-tester/
 ├── README.md                     # 📍 You are here
 ├── .gitignore
 │
-├── desktop-version/               # 🖥️  Python Edition (V2.x)
+├── desktop version/               # 🖥️  Python Edition (V2.x)
 │   ├── main.py
 │   ├── ui.py
 │   ├── logic.py
@@ -73,7 +73,7 @@ typing-speed-tester/
 │   ├── screenshots/
 │   └── README.md                  # → Full desktop documentation
 │
-└── web-version/                   # 🌐 Web Edition (V3.x)
+└── web version/                   # 🌐 Web Edition (V3.x)
     ├── index.html
     ├── style.css
     ├── script.js
@@ -89,14 +89,14 @@ typing-speed-tester/
 
 ### Desktop Edition
 ```bash
-cd desktop-version
+cd "desktop version"
 pip install -r requirements.txt
 python main.py
 ```
 
 ### Web Edition
 ```bash
-cd web-version
+cd "web version"
 # just open index.html in your browser
 ```
 
