@@ -2,6 +2,8 @@ import customtkinter as ctk
 import random
 import json
 import os
+from playsound import playsound
+import threading
 
 from sentences import (
     easy_sentences,
@@ -35,13 +37,11 @@ class TypingSpeedApp:
             medium_sentences
         )
 
-        # Load High Scores
         self.high_score_file = "highscore.json"
         self.best_wpm = 0
         self.best_accuracy = 0
         self.load_high_scores()
 
-        # TITLE
         self.title_label = ctk.CTkLabel(
             root,
             text="Typing Speed Tester",
@@ -49,7 +49,7 @@ class TypingSpeedApp:
         )
         self.title_label.pack(pady=20)
 
-        # DIFFICULTY FRAME
+        # Difficulty Buttons
         self.difficulty_frame = ctk.CTkFrame(root)
         self.difficulty_frame.pack(pady=10)
 
@@ -74,7 +74,7 @@ class TypingSpeedApp:
         )
         self.hard_btn.grid(row=0, column=2, padx=10)
 
-        # SENTENCE DISPLAY
+        # Sentence Display
         self.sentence_display = ctk.CTkTextbox(
             root,
             width=800,
@@ -103,7 +103,7 @@ class TypingSpeedApp:
             state="disabled"
         )
 
-        # TEXTBOX
+        # Input Box
         self.textbox = ctk.CTkTextbox(
             root,
             width=700,
@@ -118,7 +118,7 @@ class TypingSpeedApp:
             self.check_typing
         )
 
-        # STATS FRAME
+        # Stats
         self.stats_frame = ctk.CTkFrame(root)
         self.stats_frame.pack(pady=20)
 
@@ -143,7 +143,7 @@ class TypingSpeedApp:
         )
         self.accuracy_label.grid(row=0, column=2, padx=20)
 
-        # HIGH SCORE FRAME
+        # High Scores
         self.high_score_frame = ctk.CTkFrame(root)
         self.high_score_frame.pack(pady=10)
 
@@ -161,7 +161,7 @@ class TypingSpeedApp:
         )
         self.best_accuracy_label.grid(row=0, column=1, padx=20)
 
-        # RESTART BUTTON
+        # Restart Button
         self.restart_button = ctk.CTkButton(
             root,
             text="Restart",
@@ -172,6 +172,14 @@ class TypingSpeedApp:
         )
 
         self.restart_button.pack(pady=20)
+
+    def play_sound(self, sound_path):
+
+        threading.Thread(
+            target=playsound,
+            args=(sound_path,),
+            daemon=True
+        ).start()
 
     def load_high_scores(self):
 
@@ -216,6 +224,21 @@ class TypingSpeedApp:
 
         typed_text = self.textbox.get("1.0", "end-1c")
 
+        # Keypress sound
+        if len(typed_text) > 0:
+            self.play_sound("sounds/key.wav")
+
+        # Error sound only for latest typed character
+        current_index = len(typed_text) - 1
+
+        if current_index >= 0:
+
+            if current_index < len(self.current_sentence):
+
+                if typed_text[current_index] != self.current_sentence[current_index]:
+
+                    self.play_sound("sounds/error.wav")
+
         self.highlight_text(typed_text)
 
         if not self.timer_started and len(typed_text) > 0:
@@ -238,7 +261,6 @@ class TypingSpeedApp:
             text=f"Accuracy: {accuracy}%"
         )
 
-        # Update High Scores
         if wpm > self.best_wpm:
             self.best_wpm = wpm
 
@@ -261,7 +283,10 @@ class TypingSpeedApp:
             state="normal"
         )
 
-        self.sentence_display.delete("1.0", "end")
+        self.sentence_display.delete(
+            "1.0",
+            "end"
+        )
 
         for i, char in enumerate(self.current_sentence):
 
@@ -313,6 +338,10 @@ class TypingSpeedApp:
 
             self.textbox.configure(
                 state="disabled"
+            )
+
+            self.play_sound(
+                "sounds/finish.wav"
             )
 
     def restart_test(self):

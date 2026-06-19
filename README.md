@@ -1,15 +1,15 @@
-# ⌨️ Typing Speed Tester V2.3
+# ⌨️ Typing Speed Tester V2.4
 
 ![Python](https://img.shields.io/badge/Python-3.x-blue)
 ![CustomTkinter](https://img.shields.io/badge/GUI-CustomTkinter-green)
 ![Status](https://img.shields.io/badge/Status-Active-success)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
-![Version](https://img.shields.io/badge/Version-2.3-orange)
+![Version](https://img.shields.io/badge/Version-2.4-orange)
 
 A clean and modern **Typing Speed Tester** built with **Python** and **CustomTkinter**.  
 The application measures your **Words Per Minute (WPM)** and **Typing Accuracy** in real time while practicing with randomly selected sentences.
 
-Now upgraded with **countdown timer**, **live character highlighting**, **difficulty modes**, and **persistent high score tracking**.
+Now upgraded with **countdown timer**, **live character highlighting**, **difficulty modes**, **persistent high score tracking**, and **typing sound effects**.
 
 ---
 
@@ -22,6 +22,9 @@ Now upgraded with **countdown timer**, **live character highlighting**, **diffic
 - 🔴 Live wrong character highlighting
 - 📚 Difficulty modes (Easy / Medium / Hard)
 - 🏆 Persistent high score tracking
+- 🔊 Typing sound effects
+- ❌ Error sound feedback
+- 🎉 Finish sound on test completion
 - 🔄 Restart test anytime
 - 📝 Random practice sentences
 - 🌙 Modern dark-themed UI
@@ -29,7 +32,7 @@ Now upgraded with **countdown timer**, **live character highlighting**, **diffic
 
 ---
 
-## 🆕 What's New in V2.3
+## 🆕 What's New in V2.4
 
 ### V2.0
 - ⏱️ Added **60-second countdown timer**
@@ -56,6 +59,16 @@ Now upgraded with **countdown timer**, **live character highlighting**, **diffic
 - 🔄 Auto-loads high scores on startup
 - 📈 Tracks performance progression across sessions
 
+### V2.4
+- 🔊 Added **Typing Sound Effects**
+- ⌨️ Key press sound on every keystroke
+- ❌ Error sound triggers only once per wrong character
+- 🎉 Finish sound plays when timer ends
+- 📝 Improved sentence scaling:
+  - Easy → 3 lines
+  - Medium → 6 lines
+  - Hard → 8–9 lines
+
 ---
 
 ## 📸 Screenshots
@@ -74,6 +87,10 @@ Now upgraded with **countdown timer**, **live character highlighting**, **diffic
 ├── logic.py
 ├── sentences.py
 ├── highscore.json
+├── sounds/
+│   ├── key.wav
+│   ├── error.wav
+│   └── finish.wav
 ├── screenshots/
 │   ├── menu.png
 │   ├── speed_test.png
@@ -89,6 +106,7 @@ Now upgraded with **countdown timer**, **live character highlighting**, **diffic
 git clone <repository-url>
 cd typing-speed-tester
 pip install customtkinter
+pip install playsound==1.2.2
 ```
 
 ---
@@ -107,6 +125,7 @@ python main.py
 - CustomTkinter
 - Tkinter
 - JSON (High Score Storage)
+- Playsound (Audio Feedback)
 
 ---
 
