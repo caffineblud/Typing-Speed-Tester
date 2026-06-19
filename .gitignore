@@ -1,4 +1,34 @@
+# Python
 __pycache__/
 *.pyc
-.env
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+
+# Virtual environments
 venv/
+env/
+.venv/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Python JSON runtime files (optional)
+desktop-version/highscore.json
+web-version/data/highscore.json
+web-version/data/performance.json
+
+# Node (future if you add build tools)
+node_modules/
+
+# Environment files
+.env

@@ -1,138 +1,137 @@
-# ⌨️ Typing Speed Tester V2.4
+# ⌨️ Typing Speed Tester
 
-![Python](https://img.shields.io/badge/Python-3.x-blue)
-![CustomTkinter](https://img.shields.io/badge/GUI-CustomTkinter-green)
-![Status](https://img.shields.io/badge/Status-Active-success)
-![License](https://img.shields.io/badge/License-MIT-yellow)
-![Version](https://img.shields.io/badge/Version-2.4-orange)
+![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat-square&logo=python&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![CustomTkinter](https://img.shields.io/badge/CustomTkinter-GUI-1F6AA5?style=flat-square&logo=python&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-22c55e?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Active-22c55e?style=flat-square)
 
-A clean and modern **Typing Speed Tester** built with **Python** and **CustomTkinter**.  
-The application measures your **Words Per Minute (WPM)** and **Typing Accuracy** in real time while practicing with randomly selected sentences.
-
-Now upgraded with **countdown timer**, **live character highlighting**, **difficulty modes**, **persistent high score tracking**, and **typing sound effects**.
+> A typing speed test built **twice** — once as a Python desktop app, once as a vanilla web app. Same core idea, two completely different implementations. Pick your platform.
 
 ---
 
-## ✨ Features
+## 📸 Preview
+
+<table align="center">
+<tr>
+<td><img src="desktop-version/screenshots/V2.3.png" width="430" alt="Desktop Edition"/></td>
+<td><img src="web-version/screenshots/V3.0.png" width="430" alt="Web Edition"/></td>
+</tr>
+<tr>
+<td align="center"><b>🖥️ Desktop Edition (V2.4)</b></td>
+<td align="center"><b>🌐 Web Edition (V3.0)</b></td>
+</tr>
+</table>
+
+---
+
+## 🧭 Choose Your Version
+
+| | 🖥️ Desktop Edition | 🌐 Web Edition |
+|---|---|---|
+| **Stack** | Python + CustomTkinter | HTML + CSS + JavaScript |
+| **Run Requirement** | Python + pip install | Just a browser |
+| **High Score Storage** | `highscore.json` (file) | `localStorage` (browser) |
+| **Highlighting Method** | `CTkTextbox` text tags | One `<span>` per character |
+| **Audio** | `playsound` on daemon threads | HTML5 `Audio` API |
+| **Best for** | Offline practice, native desktop feel | Quick access, no install, shareable link |
+| **Docs** | [`desktop-version/README.md`](desktop-version/README.md) | [`web-version/README.md`](web-version/README.md) |
+
+---
+
+## ✨ Shared Features (Both Versions)
 
 - 🚀 Real-time WPM calculation
 - 🎯 Live accuracy tracking
-- ⏱️ 60-second countdown timer
-- 🟢 Live correct character highlighting
-- 🔴 Live wrong character highlighting
-- 📚 Difficulty modes (Easy / Medium / Hard)
+- ⏱️ 60-second countdown timer, starts on first keystroke
+- 🟢🔴 Live correct/wrong character highlighting
+- 📚 Difficulty modes — Easy / Medium / Hard
 - 🏆 Persistent high score tracking
-- 🔊 Typing sound effects
-- ❌ Error sound feedback
-- 🎉 Finish sound on test completion
-- 🔄 Restart test anytime
-- 📝 Random practice sentences
-- 🌙 Modern dark-themed UI
-- 🖥️ Built using CustomTkinter
+- 🔊 Sound feedback — keystroke, error, and finish sounds
+- 🔄 Instant restart
+- 🌙 Dark-themed UI
 
 ---
 
-## 🆕 What's New in V2.4
+## 🗂️ Repository Structure
 
-### V2.0
-- ⏱️ Added **60-second countdown timer**
-- ▶️ Timer starts automatically on first key press
-- 🔒 Typing box disables when timer reaches zero
-- 🔄 Restart fully resets timer and stats
-
-### V2.1
-- 🟢 Added **live character highlighting**
-- 🔴 Correct input turns green
-- ❌ Wrong input turns red
-- 🎯 Improved real-time typing feedback
-
-### V2.2
-- 📚 Added **Difficulty Modes**
-- 🟢 Easy → short/simple sentences
-- 🟡 Medium → balanced sentence difficulty
-- 🔴 Hard → long/complex sentences
-
-### V2.3
-- 🏆 Added **High Score System**
-- 💾 Best WPM stored in `highscore.json`
-- 💾 Best Accuracy stored in `highscore.json`
-- 🔄 Auto-loads high scores on startup
-- 📈 Tracks performance progression across sessions
-
-### V2.4
-- 🔊 Added **Typing Sound Effects**
-- ⌨️ Key press sound on every keystroke
-- ❌ Error sound triggers only once per wrong character
-- 🎉 Finish sound plays when timer ends
-- 📝 Improved sentence scaling:
-  - Easy → 3 lines
-  - Medium → 6 lines
-  - Hard → 8–9 lines
-
----
-
-## 📸 Screenshots
-
-### V2.3 Updated UI
-![V2.3](screenshots/V2.3.png)
-
----
-
-## 📂 Project Structure
-
-```text
-.
-├── main.py
-├── ui.py
-├── logic.py
-├── sentences.py
-├── highscore.json
-├── sounds/
-│   ├── key.wav
-│   ├── error.wav
-│   └── finish.wav
-├── screenshots/
-│   ├── menu.png
-│   ├── speed_test.png
-│   └── V2.3.png
-└── README.md
+```
+typing-speed-tester/
+│
+├── README.md                     # 📍 You are here
+├── .gitignore
+│
+├── desktop-version/               # 🖥️  Python Edition (V2.x)
+│   ├── main.py
+│   ├── ui.py
+│   ├── logic.py
+│   ├── sentences.py
+│   ├── highscore.json
+│   ├── requirements.txt
+│   ├── sounds/
+│   ├── screenshots/
+│   └── README.md                  # → Full desktop documentation
+│
+└── web-version/                   # 🌐 Web Edition (V3.x)
+    ├── index.html
+    ├── style.css
+    ├── script.js
+    ├── sentences.js
+    ├── sounds/
+    ├── screenshots/
+    └── README.md                  # → Full web documentation
 ```
 
 ---
 
-## ⚙️ Installation
+## ⚡ Quick Start
 
+### Desktop Edition
 ```bash
-git clone <repository-url>
-cd typing-speed-tester
-pip install customtkinter
-pip install playsound==1.2.2
-```
-
----
-
-## ▶️ Run
-
-```bash
+cd desktop-version
+pip install -r requirements.txt
 python main.py
 ```
 
+### Web Edition
+```bash
+cd web-version
+# just open index.html in your browser
+```
+
+For full setup, architecture, and feature breakdowns, see each version's own README linked above.
+
 ---
 
-## 🛠️ Tech Stack
+## 🆕 Version Timeline
 
-- Python
-- CustomTkinter
-- Tkinter
-- JSON (High Score Storage)
-- Playsound (Audio Feedback)
+| Version | Edition | Highlights |
+|---|---|---|
+| **V2.0 – V2.4** | 🖥️ Desktop | Countdown timer → live highlighting → difficulty modes → high scores → sound effects |
+| **V3.0** | 🌐 Web | Full rebuild as a zero-dependency browser app with the same core feature set |
+
+---
+
+## 🔮 Roadmap
+
+- [ ] 📊 WPM-over-time graphs (both versions)
+- [ ] 🌐 Deploy web version live (GitHub Pages / Vercel)
+- [ ] 🎨 Theme switcher
+- [ ] ⌨️ Custom sentence import
+- [ ] 🏆 Online leaderboard (web version)
 
 ---
 
 ## 👨‍💻 Author
 
+<div align="center">
+
 **Yash Kumar Singh**
 
----
+[![GitHub](https://img.shields.io/badge/GitHub-caffineblud-181717?style=flat-square&logo=github)](https://github.com/caffineblud)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Yash_Kumar_Singh-0077B5?style=flat-square&logo=linkedin)](https://linkedin.com/in/yash-kumar-singh-8a4b193b1)
 
 ⭐ If you like this project, consider giving it a star.
+
+</div>
