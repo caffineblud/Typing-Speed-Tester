@@ -27,8 +27,7 @@ class TypingSpeedApp:
 
         self.root = root
         self.root.title("Typing Speed Tester")
-        self.root.geometry("950x750")
-
+        self.root.geometry("1100x850")
         self.timer_started = False
         self.time_left = 60
         self.current_difficulty = "Medium"
@@ -77,12 +76,11 @@ class TypingSpeedApp:
         # Sentence Display
         self.sentence_display = ctk.CTkTextbox(
             root,
-            width=800,
-            height=100,
-            font=("Arial", 20)
+            width=950,
+            height=220,
+            font=("Arial", 22)
         )
-
-        self.sentence_display.pack(pady=20)
+        self.sentence_display.pack(pady=25, padx=20)
 
         self.sentence_display.insert(
             "1.0",
@@ -106,12 +104,12 @@ class TypingSpeedApp:
         # Input Box
         self.textbox = ctk.CTkTextbox(
             root,
-            width=700,
-            height=120,
+            width=950,
+            height=180,
             font=("Arial", 18)
         )
 
-        self.textbox.pack(pady=20)
+        self.textbox.pack(pady=25, padx=20)
 
         self.textbox.bind(
             "<KeyRelease>",
@@ -145,7 +143,7 @@ class TypingSpeedApp:
 
         # High Scores
         self.high_score_frame = ctk.CTkFrame(root)
-        self.high_score_frame.pack(pady=10)
+        self.high_score_frame.pack(pady=15)
 
         self.best_wpm_label = ctk.CTkLabel(
             self.high_score_frame,
@@ -166,12 +164,13 @@ class TypingSpeedApp:
             root,
             text="Restart",
             command=self.restart_test,
-            width=200,
-            height=50,
-            font=("Arial", 18)
+            width=280,
+            height=55,
+            font=("Arial", 20, "bold"),
+            corner_radius=12
         )
 
-        self.restart_button.pack(pady=20)
+        self.restart_button.pack(pady=(10, 20))
 
     def play_sound(self, sound_path):
 
